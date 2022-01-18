@@ -1,10 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="en"><head><title>Naptár Converter</title>
+<html lang="en"><head>
+  <title>Calendar Converter</title>
 
-
-
-
-<style type="text/css">
+  
+  
+  <style type="text/css">
     BODY.main {
         margin-left: 15%;
         margin-right: 10%
@@ -12,38 +12,63 @@
     INPUT.ctr {
         text-align: center
     }
-</style>
+  </style>
+  
+  <meta name="keywords" content="calendar, converter, Julian, Gregorian, Islamic, Hebrew, Persian, Mayan, Bahai, French, Indian">
 
-<meta name="keywords" content="calendar, converter, Julian, Gregorian, Islamic, Hebrew, Persian, Mayan, Bahai, French, Indian">
-<meta name="description" content="Calendar Converter">
-<meta name="author" content="John Walker">
-<meta name="robots" content="index">
+  
+  <meta name="description" content="Calendar Converter">
 
-<script language="JavaScript" src="astro.js">
-</script>
+  
+  <meta name="author" content="John Walker">
 
-<script language="JavaScript">
+  
+  <meta name="robots" content="index">
 
+  
+  <script language="JavaScript" src="astro.js">
+  </script>
+  
+  <script language="JavaScript">
+<!--
 
-var J0000 = 1721424.5;                
-var J1970 = 2440587.5;                
-var JMJD  = 2400000.5;                
-var J1900 = 2415020.5;                
-var J1904 = 2416480.5;                
+/*  You may notice that a variety of array variables logically local
+    to functions are declared globally here.  In JavaScript, construction
+    of an array variable from source code occurs as the code is
+    interpreted.  Making these variables pseudo-globals permits us
+    to avoid overhead constructing and disposing of them in each
+    call on the function in which whey are used.  */
+
+var J0000 = 1721424.5;                // Julian date of Gregorian epoch: 0000-01-01
+var J1970 = 2440587.5;                // Julian date at Unix epoch: 1970-01-01
+var JMJD  = 2400000.5;                // Epoch of Modified Julian Date system
+var J1900 = 2415020.5;                // Epoch (day 1) of Excel 1900 date system (PC)
+var J1904 = 2416480.5;                // Epoch (day 0) of Excel 1904 date system (Mac)
 
 var NormLeap = new Array("Normál év", "Szökő év");
 
-
+/*  WEEKDAY_BEFORE  --  Return Julian date of given weekday (0 = Sunday)
+                        in the seven days ending on jd.  */
 
 function weekday_before(weekday, jd)
 {
     return jd - jwday(jd - weekday);
 }
 
+/*  SEARCH_WEEKDAY  --  Determine the Julian date for: 
+
+            weekday      Day of week desired, 0 = Sunday
+            jd           Julian date to begin search
+            direction    1 = next weekday, -1 = last weekday
+            offset       Offset from jd to begin search
+*/
+
 function search_weekday(weekday, jd, direction, offset)
 {
     return weekday_before(weekday, jd + (direction * offset));
 }
+
+//  Utility weekday functions, just wrappers for search_weekday
 
 function nearest_weekday(weekday, jd)
 {
@@ -74,6 +99,7 @@ function TestSomething()
 {
 }
 
+//  LEAP_GREGORIAN  --  Is a given year in the Gregorian calendar a leap year ?
 
 function leap_gregorian(year)
 {
@@ -81,6 +107,7 @@ function leap_gregorian(year)
             (!(((year % 100) == 0) && ((year % 400) != 0)));
 }
 
+//  GREGORIAN_TO_JD  --  Determine Julian day number from Gregorian calendar date
 
 var GREGORIAN_EPOCH = 1721425.5;
 
@@ -1143,13 +1170,13 @@ function calcExcelSerial1900()
     /* Idiot Kode Kiddies didn't twig to the fact
        (proclaimed in 1582) that 1900 wasn't a leap year,
        so every Excel day number in every database on Earth
-       which represents a date subsequent to Február 28,
+       which represents a date subsequent to February 28,
        1900 is off by one.  Note that there is no
        acknowledgement of this betrayal or warning of its
        potential consequences in the Excel help file.  Thank
        you so much Mister Talking Paper Clip.  Some day
        we're going to celebrate your extinction like it was
-       Február 29 ... 1900.  */
+       February 29 ... 1900.  */
 
     if (d > 60) {
         d--;
@@ -1196,68 +1223,91 @@ function calcIsoDay()
 }
 
 // -->
-</script><!--  Why don't we apply the "main" style class to the following body
+  </script><!--  Why don't we apply the "main" style class to the following body
       tag so the text is nicely laid out rather than drooling
       to both edges of the page?  Because Netscrape, as of 4.7,
       forgets the indentation on both sides as soon as it sees the
       first left-aligned table, and that looks even dumber.
       Exploder gets it right, but we don't create Exploder-specific
       documents here.
---></head><body bgcolor="#ffffff">
+-->
+</head><body style="background-color: rgb(255, 255, 255);">
+<h1 style="text-align: center;">Naptár átváltás</h1>
 
-<h1 style="text-align: center;">Naptar Converter</h1>
+<hr><br>
 
-                     <h3>Gorog naptas<br>
+<p><br>
+</p>
+
+<h3>Gorog naptar<br>
 </h3>
 
 <form name="gregorian">
-<table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
-
-<tbody><tr>
-<th>Datum
-</th><td align="center">
-
-    <input name="year" value="1998" size="5" type="text">
-    <select name="month" size="1">
-        <option value="1">Január
-        </option><option value="2">Február
-        </option><option value="3">Március
-        </option><option value="4">Április
-        </option><option value="5">Május
-        </option><option value="6">Június
-        </option><option value="7">Júlis
-        </option><option value="8">Augusztus
-        </option><option value="9">Szeptember
-        </option><option value="10">Október
-        </option><option value="11">November
-        </option><option value="12">December
-    </option></select>
-    <input name="day" value="1" size="3" type="text">
-
-    <br>
-
-    <input name="leap" value="" size="12" class="ctr" readonly="readonly" type="text">
-
-</td></tr><tr>
-<th>Id&#337;
-</th><td align="center">
-    <input name="hour" value="00" size="2" type="text">:<input name="min" value="00" size="2" type="text">:<input name="sec" value="00" size="2" type="text">
-
-</td></tr><tr>
-<th>Nap
-</th><td align="center">
-    <input name="wday" value="" size="9" class="ctr" readonly="readonly" type="text">
-
-</td></tr><tr>
-<td colspan="2" align="center">
-<input value="Számolj" onclick="calcGregorian();" type="button">
-</td></tr></tbody></table>
+  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+    <tbody>
+      <tr>
+        <th> Date:
+        </th>
+        <td align="center"> <input name="year" value="1998" size="5" type="text">
+        <select name="month" size="1">
+            <option value="1">Január </option>
+            <option value="2">Február </option>
+            <option value="3">Március </option>
+            <option value="4">Április </option>
+            <option value="5">Május </option>
+            <option value="6">Június </option>
+            <option value="7">Júlis </option>
+            <option value="8">Augusztus </option>
+            <option value="9">Szeptember </option>
+            <option value="10">Október </option>
+            <option value="11">November </option>
+            <option value="12">December </option>
+        </select>
+        <input name="day" value="1" size="3" type="text"> <br>
+        <input name="leap" value="" size="12" class="ctr" readonly="readonly" type="text"></td>
+      </tr>
+      <tr>
+        <th> Time:
+        </th>
+        <td align="center"> <input name="hour" value="00" size="2" type="text">:<input name="min" value="00" size="2" type="text">:<input name="sec" value="00" size="2" type="text">
+        </td>
+      </tr>
+      <tr>
+        <th> Weekday:
+        </th>
+        <td align="center"> <input name="wday" value="" size="9" class="ctr" readonly="readonly" type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+        <input value="Számolj" onclick="calcGregorian();" type="button"></td>
+      </tr>
+    </tbody>
+  </table>
 </form>
 
 <script language="JavaScript">
+<!--
 
+    //  A little JavaScript action to preset the fields in
+    //  the request form to today's date.
 
     var today = new Date();
+
+    /*  The following idiocy is due to bizarre incompatibilities
+        in the behaviour of getYear() between Netscrape and
+        Exploder.  The ideal solution is to use getFullYear(),
+        which returns the actual year number, but that would
+        break this code on versions of JavaScript prior to
+        1.2.  So, for the moment we use the following code
+        which works for all versions of JavaScript and browsers
+        for all year numbers greater than 1000.  When we're willing
+        to require JavaScript 1.2, this may be replaced by
+        the single line:
+
+            document.gregorian.year.value = today.getFullYear();
+
+        Thanks to Larry Gilbert for pointing out this problem.
+    */
 
     var y = today.getYear();
     if (y < 1000) {
@@ -1268,177 +1318,161 @@ function calcIsoDay()
     document.gregorian.month.selectedIndex = today.getMonth();
     document.gregorian.day.value = today.getDate();
 // -->
-</script>
+</script><br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+<br>
 
 
-<br clear="left">
-
-                         <h3>Julian nap eddigi napjai<br>
-</h3>
+<h3>Julian naptar</h3>
 
 <form name="julianday">
-<table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
-
-<tbody><tr>
-<td align="center">
-    <b>Julian nap:</b>
-
-    <input name="day" value="" size="16" type="text">
-</td></tr><tr>
-<td colspan="2" align="center">
-<input value="Számolj" onclick="calcJulian();" type="button">
-</td></tr></tbody></table>
+  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+    <tbody>
+      <tr>
+        <td align="center"> <b>Julian nap:</b> <input name="day" value="" size="16" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+        <input value="Számolj" onclick="calcJulian();" type="button"></td>
+      </tr>
+    </tbody>
+  </table>
 </form>
-
 
 <br clear="left">
 
 <p>
+</p>
 
-</p><form name="modifiedjulianday">
-<table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
-
-<tbody><tr>
-<td align="center">
-    <b>Modosotott Julian nap:</b>
-
-    <input name="day" value="" size="16" type="text">
-</td></tr><tr>
-<td colspan="2" align="center">
-<input value="Számolj" onclick="calcModifiedJulian();" type="button">
-</td></tr></tbody></table>
+<form name="modifiedjulianday">
+  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+    <tbody>
+      <tr>
+        <td align="center"> <b>modositott Julian napok:</b> <input name="day" value="" size="16" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+        <input value="Számolj" onclick="calcModifiedJulian();" type="button"></td>
+      </tr>
+    </tbody>
+  </table>
 </form>
+<br>
+<br>
+<br>
 
-<br clear="left">
+<br>
 
-                     <h3>Julian naptar<br>
-</h3>
+<br>
+
+<br>
 
 <form name="juliancalendar">
-<table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
-
-<tbody><tr>
-<th>Datum
-</th><td align="center">
-
-    <input name="year" value="" size="5" type="text">
-    <select name="month" size="1">
-        <option value="1">Január
-        </option><option value="2">Február
-        </option><option value="3">March
-        </option><option value="4">April
-        </option><option value="5">May
-        </option><option value="6">June
-        </option><option value="7">July
-        </option><option value="8">August
-        </option><option value="9">September
-        </option><option value="10">October
-        </option><option value="11">November
-        </option><option value="12">December
-    </option></select>
-    <input name="day" value="" size="3" type="text">
-
-    <br>
-
-    <input name="leap" value="" size="12" class="ctr" readonly="readonly" type="text">
-
-</td></tr><tr>
-<td colspan="2" align="center">
-<input value="Számolj" onclick="calcJulianCalendar();" type="button">
-</td></tr></tbody></table>
+  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+    <tbody>
+      <tr>
+        <th> Date:
+        </th>
+        <td align="center"> <input name="year" value="" size="5" type="text">
+        <select name="month" size="1">
+        <option value="1">Január </option>
+        <option value="2">Február </option>
+        <option value="3">Március </option>
+        <option value="4">Április </option>
+        <option value="5">Május </option>
+        <option value="6">Június </option>
+        <option value="7">Júlis </option>
+        <option value="8">Augusztus </option>
+        <option value="9">Szeptember </option>
+        <option value="10">Október </option>
+        <option value="11">November </option>
+        <option value="12">December </option>
+        </select>
+        <input name="day" value="" size="3" type="text"> <br>
+        <input name="leap" value="" size="12" class="ctr" readonly="readonly" type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+        <input value="Számolj" onclick="calcJulianCalendar();" type="button"></td>
+      </tr>
+    </tbody>
+  </table>
 </form>
 
+<br>
 
+<p><br clear="left">
+<!--
+                         <h3>Gregorian Serial Day</h3>
 
+<form name="gregserial">
+<table align=left hspace=8 width="45%" border cellpadding=5 bgcolor="#D0D0D0">
 
-<br clear="left">
-                     <h3>Zsido naptar<br>
+<tr>
+<td align=center>
+    <b>Gregorian serial day:</b>
+    <input type="text" name="day" value="" size="16">
+<tr>
+<td colspan=2 align=center>
+<input type="button" value="Számolj" onClick="calcGregSerial();">
+</table>
+</form>
+<br clear=left>
+-->
+</p>
+
+<h3>Zsido naptar<br>
 </h3>
 
 <form name="hebrew">
-
-<table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
-
-<tbody><tr>
-<th>Datum
-</th><td align="center">
-
-    <input name="year" value="" size="5" type="text">
-    <select name="month" size="1">
-        <option value="1">Nisan
-        </option><option value="2">Iyyar
-        </option><option value="3">Sivan
-        </option><option value="4">Tammuz
-        </option><option value="5">Av
-        </option><option value="6">Elul
-        </option><option value="7">Tishri
-        </option><option value="8">Heshvan
-        </option><option value="9">Kislev
-        </option><option value="10">Teveth
-        </option><option value="11">Shevat
-        </option><option value="12">Adar
-        </option><option value="13">Veadar
-    </option></select>
-    <input name="day" value="" size="3" type="text">
-
-    <br>
-
-    <input name="leap" value="" size="36" class="ctr" readonly="readonly" type="text">
-
-</td></tr><tr>
-<td colspan="2" align="center">
-<input value="Számolj" onclick="calcHebrew();" type="button">
-</td></tr></tbody></table>
+  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+    <tbody>
+      <tr>
+        <th> Date:
+        </th>
+        <td align="center"> <input name="year" value="" size="5" type="text">
+        <select name="month" size="1">
+        <option value="1">Nisan </option>
+        <option value="2">Iyyar </option>
+        <option value="3">Sivan </option>
+        <option value="4">Tammuz </option>
+        <option value="5">Av </option>
+        <option value="6">Elul </option>
+        <option value="7">Tishri </option>
+        <option value="8">Heshvan </option>
+        <option value="9">Kislev </option>
+        <option value="10">Teveth </option>
+        <option value="11">Shevat </option>
+        <option value="12">Adar </option>
+        <option value="13">Veadar </option>
+        </select>
+        <input name="day" value="" size="3" type="text"> <br>
+        <input name="leap" value="" size="36" class="ctr" readonly="readonly" type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+        <input value="Számolj" onclick="calcHebrew();" type="button"></td>
+      </tr>
+    </tbody>
+  </table>
 </form>
 
-<br clear="left">
-
-                     <br>
-
-
-<form name="islamic"><br>
-</form>
-
-<br clear="left">
-
-                     <h3></h3><br>
-<form name="mayancount"><br>
-</form><br>
-<p>
-</p><br>
 <br>
 
-
-
-
-
-
-<form name="isoweek"><br>
-</form>
-
-
-<br clear="left">
-
-<p>
-
-</p><br>
 <br>
-
-
-
-
-
-
-
-
-
-
-
-
-<script language="JavaScript">
-
-    calcGregorian();                  
-
-</script>
-
 </body></html>
