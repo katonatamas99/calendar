@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en"><head>
-  <title>Calendar Converter</title>
+  <title>Naptár konvertáló</title>
 
   
   
@@ -1234,7 +1234,7 @@ function calcIsoDay()
 </head><style>
     body  {
       background-image: url("paper.jpg");
-      background-color: #cccccc;
+      background-color: #000000;
     }
     </style>
 <h1 style="text-align: center;">Naptár átváltás</h1>
@@ -1244,14 +1244,14 @@ function calcIsoDay()
 <p><br>
 </p>
 
-<h3>Gorog naptar<br>
+<h3 style="text-align: center;">Görog naptár<br>
 </h3>
 
 <form name="gregorian">
-  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+  <table align="center" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
     <tbody>
       <tr>
-        <th> Date:
+        <th> Dátum:
         </th>
         <td align="center"> <input name="year" value="1998" size="5" type="text">
         <select name="month" size="1">
@@ -1272,13 +1272,13 @@ function calcIsoDay()
         <input name="leap" value="" size="12" class="ctr" readonly="readonly" type="text"></td>
       </tr>
       <tr>
-        <th> Time:
+        <th> Idő:
         </th>
         <td align="center"> <input name="hour" value="00" size="2" type="text">:<input name="min" value="00" size="2" type="text">:<input name="sec" value="00" size="2" type="text">
         </td>
       </tr>
       <tr>
-        <th> Weekday:
+        <th> Nap:
         </th>
         <td align="center"> <input name="wday" value="" size="9" class="ctr" readonly="readonly" type="text"></td>
       </tr>
@@ -1325,26 +1325,11 @@ function calcIsoDay()
 // -->
 </script><br>
 
-<br>
 
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-<br>
-
-
-<h3>Julian naptar</h3>
+<h3 style="text-align: center;">Julian naptár</h3>
 
 <form name="julianday">
-  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+  <table align="center" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
     <tbody>
       <tr>
         <td align="center"> <b>Julian nap:</b> <input name="day" value="" size="16" type="text">
@@ -1358,16 +1343,14 @@ function calcIsoDay()
   </table>
 </form>
 
-<br clear="left">
-
 <p>
 </p>
 
 <form name="modifiedjulianday">
-  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+  <table align="center" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
     <tbody>
       <tr>
-        <td align="center"> <b>modositott Julian napok:</b> <input name="day" value="" size="16" type="text">
+        <td align="center"> <b>Módosított Julian napok:</b> <input name="day" value="" size="16" type="text">
         </td>
       </tr>
       <tr>
@@ -1378,20 +1361,13 @@ function calcIsoDay()
   </table>
 </form>
 <br>
-<br>
-<br>
 
-<br>
-
-<br>
-
-<br>
 
 <form name="juliancalendar">
-  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+  <table align="center" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
     <tbody>
       <tr>
-        <th> Date:
+        <th> Dátum:
         </th>
         <td align="center"> <input name="year" value="" size="5" type="text">
         <select name="month" size="1">
@@ -1441,14 +1417,14 @@ function calcIsoDay()
 -->
 </p>
 
-<h3>Zsido naptar<br>
+<h3 style="text-align: center;">Zsidó naptár<br>
 </h3>
 
 <form name="hebrew">
-  <table align="left" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
+  <table align="center" bgcolor="#d0d0d0" border="1" cellpadding="5" hspace="8" width="45%">
     <tbody>
       <tr>
-        <th> Date:
+        <th> Dátum:
         </th>
         <td align="center"> <input name="year" value="" size="5" type="text">
         <select name="month" size="1">
@@ -1467,7 +1443,7 @@ function calcIsoDay()
         <option value="13">Veadar </option>
         </select>
         <input name="day" value="" size="3" type="text"> <br>
-        <input name="leap" value="" size="36" class="ctr" readonly="readonly" type="text"></td>
+        </td>
       </tr>
       <tr>
         <td colspan="2" align="center">
